@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-12 d-flex justify-content-end">
+    <button mat-raised-button color="accent" (click)="download()">
+      ดาวน์โหลด
+    </button>
+  </div>
+</div>
+
+<mat-progress-spinner color="primary" mode="indeterminate" [hidden]="!loading">
+</mat-progress-spinner>
+
+<div
+  class="row mb-3 mt-4 ms-1 mx-1"
+  style="
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  "
+  id="image"
+  [ngStyle]="{ 'background-image': background_image }"
+>
+  <div class="col-md-12 d-flex flex-row p-0">
+    <img [src]="shiki" style="width: 30%; height: auto" *ngIf="shiki"/>
+    <div
+      class="d-flex flex-column"
+      style="padding: 20px; width: 100%"
+      [ngStyle]="{ 'background-color': background_color }"
+    >
+      <ng-container *ngFor="let i of data">
+        <div class="pb-3" *ngIf="i.set_name">
+          <p>
+            <b>{{ i.set_name }}</b>
+          </p>
+          <img
+            *ngFor="let item of i"
+            [src]="item.image"
+            class="logo"
+            [ngStyle]="{ opacity: i.set_name ? '1' : '0.5' }"
+          />
+        </div>
+      </ng-container>
+    </div>
+    <div
+      class="pt-3 pb-3"
+      style="width: 100%"
+      [ngStyle]="{ 'background-color': background_color }"
+    >
+      <h2><b>รายละเอียดเพิ่มเติม</b></h2>
+      <p>{{ detail }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-3 pb-1">
+  <div class="col-md-12 d-flex justify-content-between">
+    <button mat-raised-button color="primary" (click)="code_color()">
+      สีพื้นหลัง
+    </button>
+    <button mat-raised-button color="primary" (click)="change_background()">
+      ภาพพื้นหลัง
+    </button>
+    <button mat-raised-button color="primary" (click)="change_shiki()">
+      ชิกิงามิ
+    </button>
+  </div>
+</div>
+
+<div class="row pt-3 pb-5">
+  <div class="col-md-6">
+    <p *ngFor="let i of data">
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อเซ็ต</mat-label>
+        <input matInput placeholder="ตั้งชื่อเซ็ต" [(ngModel)]="i.set_name" />
+      </mat-form-field>
+      <img
+        *ngFor="let item of i"
+        [src]="item.image"
+        class="logo"
+        [ngStyle]="{ opacity: i.set_name ? '1' : '0.5' }"
+      />
+    </p>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="outline">
+      <mat-label>รายละเอียด</mat-label>
+      <textarea matInput [(ngModel)]="detail"></textarea>
+    </mat-form-field>
+  </div>
+</div>
