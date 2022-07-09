@@ -6,6 +6,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-main',
@@ -18,10 +19,11 @@ export class MainComponent implements OnInit {
   set: any = sessionStorage.getItem('item');
   select_set: any = 0;
   class: any;
-
-  constructor(private service: ApiService) {
+  constructor(private service: ApiService, private spinner: NgxSpinnerService) {
     this.set = JSON.parse(this.set) || [[]];
+    this.spinner.show();
     this.service.Get('Items/GetAllItems').subscribe((res) => {
+      this.spinner.hide();
       this.items = res;
     });
   }
@@ -88,12 +90,10 @@ export class MainComponent implements OnInit {
     }
   }
 
-  
-
   next() {
     for (let i = 0; i < this.set?.length; i++) {
-      if(!this.set[i].length) {
-        this.delete_set(i)
+      if (!this.set[i].length) {
+        this.delete_set(i);
       }
     }
     sessionStorage.setItem('item', JSON.stringify(this.set));

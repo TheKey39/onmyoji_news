@@ -3,9 +3,15 @@
     <button mat-raised-button color="warn" (click)="back()">
       <mat-icon>backspace</mat-icon>  &nbsp;ย้อนกลับ
     </button>
-    <button mat-raised-button color="accent" (click)="download()">
-      <mat-icon>cloud_download</mat-icon> &nbsp;ดาวน์โหลด
-    </button>
+    <div class="d-flex flex-row">
+      <button mat-raised-button color="accent" (click)="download()">
+        <mat-icon>cloud_download</mat-icon> &nbsp;ดาวน์โหลด
+      </button>
+      <button mat-raised-button color="accent" class="ms-3" (click)="save_image()" [disabled]="!user">
+        <mat-icon>bookmark</mat-icon> &nbsp;บันทึก
+      </button>
+    </div>
+    
   </div>
 </div>
 
@@ -19,10 +25,10 @@
     background-repeat: no-repeat;
     background-size: cover;
   "
-  id="image"
+  
   [ngStyle]="{ 'background-image': background_image }"
 >
-  <div class="col-md-12 d-flex flex-row p-0" [ngStyle]="{ 'background-color': background_color }">
+  <div class="col-md-12 d-flex flex-row p-0" [ngStyle]="{ 'background-color': background_color }" id="image">
     <img [src]="shiki" style="width: 30%; height: auto" *ngIf="shiki"/>
     <div
       class="d-flex flex-column"

@@ -4,6 +4,8 @@ import {
   FacebookLoginProvider,
   GoogleLoginProvider,
 } from 'angularx-social-login';
+import { ApiService } from './api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +16,41 @@ export class AppComponent {
   title = 'onmyoji-arena-front';
   showFiller = false;
   user: any = localStorage.getItem('user');
-  constructor(private authService: SocialAuthService) {
+  constructor(
+    private authService: SocialAuthService,
+    private service: ApiService
+  ) {
     this.user = JSON.parse(this.user) || null;
-    if(this.user) {
-      return
+    if (this.user) {
+      return;
     }
     this.authService.authState.subscribe((user) => {
-      if (user) localStorage.setItem('user', JSON.stringify(user));
+      if (!user) {
+        return;
+      }
+      localStorage.setItem('user', JSON.stringify(user));
       this.user = user;
+      this.service.Get('User/GetMemberByEmail/' + this.user.email).subscribe(
+        (res) => {
+          window.location.reload();
+        },
+        (error) => {
+          let object = {
+            facebookId: this.user.id,
+            name: this.user.name,
+            email: this.user.email,
+            role: 'Member',
+            itemSet: '[]',
+            maxSet: 10,
+          };
+          this.service
+            .Post('User/InsertMember', object)
+            .subscribe((response) => {
+              Swal.fire('ลงทะเบียน Member สำเร็จ', '', 'success');
+              window.location.reload()
+            });
+        }
+      );
     });
   }
 

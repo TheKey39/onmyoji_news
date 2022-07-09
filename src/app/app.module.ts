@@ -11,6 +11,8 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 
+import {NgxPaginationModule} from 'ngx-pagination'
+
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -61,12 +63,14 @@ import { AddItemComponent } from './pages/add-item/add-item.component';
 import { ResultComponent } from './pages/result/result.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { BookmarkComponent } from './pages/bookmark/bookmark.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, AddItemComponent, ResultComponent],
+  declarations: [AppComponent, MainComponent, AddItemComponent, ResultComponent, BookmarkComponent],
   imports: [
+    NgxPaginationModule,
     SocialLoginModule,
     DragDropModule,
     BrowserModule,
