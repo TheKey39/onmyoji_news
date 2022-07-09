@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.css'],
 })
 export class ResultComponent implements OnInit {
-  constructor() {}
+  constructor(private spinner: NgxSpinnerService) {}
   data: any = sessionStorage.getItem('item');
   detail: any = '';
   display: any = 'block';
@@ -19,6 +21,10 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     this.data = JSON.parse(this.data);
     console.log(this.data);
+  }
+
+  back() {
+    window.history.back();
   }
 
   async change_background() {
@@ -83,7 +89,7 @@ export class ResultComponent implements OnInit {
     });
 
     if (name) {
-      this.loading = true;
+      this.spinner.show();
       var node = document.getElementById('image') as HTMLElement;
 
       htmlToImage
@@ -93,7 +99,7 @@ export class ResultComponent implements OnInit {
           link.download = name;
           link.href = dataUrl;
           link.click();
-          this.loading = false;
+          this.spinner.hide();
           // this.display = 'none';
         })
         .catch(function (error) {

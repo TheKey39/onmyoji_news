@@ -33,17 +33,20 @@
     </div>
   </div>
 </div> -->
+
 <ng-container *ngIf="!hidden">
   <div class="row pt-5 pb-3">
-    <div class="col-md-12 d-flex justify-content-between">
+    <div class="col-md-12 d-flex flex-row">
       <button
         mat-raised-button
         color="primary"
         *ngFor="let i of set; let index = index"
         (click)="select_set = index"
+        (dblclick)="delete_set(index)"
         [ngStyle]="{ opacity: select_set == index ? '1' : '0.5' }"
+        style="margin-right: 2rem"
       >
-        Set {{ index + 1 }} (จำนวน {{ i.length }})
+        <mat-icon> stars</mat-icon> &nbsp;{{ index + 1 }} (จำนวน {{ i.length }})
       </button>
       <button mat-raised-button color="warn" (click)="add_set()">+</button>
     </div>
@@ -60,10 +63,13 @@
       >
         <div
           class="example-box text-center"
-          *ngFor="let i of set[select_set]"
+          *ngFor="let i of set[select_set]; let item_index = index"
           cdkDrag
         >
-          <img [src]="i.image" />
+          <img
+            [src]="i.image"
+            (dblclick)="delete_item(item_index, select_set)"
+          />
         </div>
       </div>
     </div>
@@ -76,10 +82,11 @@
       <div class="row pt-2 pb-3 ps-1 px-1">
         <div class="col-md-12 d-flex justify-content-between">
           <button mat-raised-button color="primary">
-            Set {{ index + 1 }} (จำนวน {{ i.length }})
+            <mat-icon> stars</mat-icon> &nbsp;{{ index + 1 }} (จำนวน
+            {{ i.length }})
           </button>
           <button mat-raised-button color="warn" (click)="delete_set(index)">
-            ลบเซ็ตนี้
+            <mat-icon>work_off</mat-icon>
           </button>
         </div>
       </div>
@@ -93,8 +100,15 @@
             (cdkDropListDropped)="drop_($event, index)"
             *ngIf="i?.length"
           >
-            <div class="example-box text-center" *ngFor="let k of i" cdkDrag>
-              <img [src]="k.image" />
+            <div
+              class="example-box text-center"
+              *ngFor="let k of i; let item_index = index"
+              cdkDrag
+            >
+              <img
+                [src]="k.image"
+                (dblclick)="delete_item(item_index, index)"
+              />
             </div>
           </div>
         </div>
@@ -144,7 +158,7 @@
     </div>
   </ng-container>
 </div>
-<div class="row p-3 board mt-3 ms-1 mx-1 mb-5" *ngIf="!hidden">
+<div class="row p-3 board mt-3 ms-1 mx-1 mb-3" *ngIf="!hidden">
   <ng-container *ngFor="let i of items">
     <div [ngClass]="class" *ngIf="i.typeName == 'สนับสนุน'">
       <img [src]="i.image" (click)="set_item(i)" />
@@ -153,14 +167,32 @@
   </ng-container>
 </div>
 
-
-<div class="row pt-3 mb-5">
-  <div class="col-md-12 d-flex justify-content-center">
-    <button mat-raised-button color="accent" (click)="next()">ถัดไป</button>
+<div class="row pt-3 mb-5 d-flex justify-content-center">
+  <div
+    [ngClass]="
+      !hidden
+        ? 'col-md-12 d-flex justify-content-center'
+        : 'col-md-6 d-flex justify-content-between'
+    "
+  >
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="!hidden"
+      (click)="hidden = !hidden"
+    >
+      <mat-icon>ballot</mat-icon> &nbsp;ภาพรวม
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      *ngIf="hidden"
+      (click)="hidden = !hidden"
+    >
+      <mat-icon>backspace</mat-icon> &nbsp;ย้อนกลับ
+    </button>
+    <button mat-raised-button color="accent" *ngIf="hidden" (click)="next()">
+      <mat-icon>how_to_reg</mat-icon> ถัดไป
+    </button>
   </div>
 </div>
-
-<a href="#" class="float" (click)="hidden = !hidden">
-  <mat-icon class="my-float" *ngIf="hidden">unfold_less</mat-icon>
-  <mat-icon class="my-float" *ngIf="!hidden">unfold_more</mat-icon>
-</a>

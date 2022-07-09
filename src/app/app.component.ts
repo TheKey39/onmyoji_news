@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +13,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'onmyoji-arena-front';
   showFiller = false;
+  user: any = localStorage.getItem('user');
+  constructor(private authService: SocialAuthService) {
+    this.user = JSON.parse(this.user) || null;
+    if(this.user) {
+      return
+    }
+    this.authService.authState.subscribe((user) => {
+      if (user) localStorage.setItem('user', JSON.stringify(user));
+      this.user = user;
+    });
+  }
 
   base64test() {
     this.toDataUrl(
@@ -16,6 +32,16 @@ export class AppComponent {
         console.log(myBase64); // myBase64 is the base64 string
       }
     );
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+    localStorage.clear();
+    window.location.reload();
   }
 
   toDataUrl(url: any, callback: any) {

@@ -5,6 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -54,11 +60,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddItemComponent } from './pages/add-item/add-item.component';
 import { ResultComponent } from './pages/result/result.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 
 @NgModule({
   declarations: [AppComponent, MainComponent, AddItemComponent, ResultComponent],
   imports: [
+    SocialLoginModule,
     DragDropModule,
     BrowserModule,
     CommonModule,
@@ -103,8 +112,26 @@ import { ResultComponent } from './pages/result/result.component';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1132944480594895')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

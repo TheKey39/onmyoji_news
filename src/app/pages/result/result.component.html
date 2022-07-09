@@ -1,13 +1,15 @@
 <div class="row">
-  <div class="col-md-12 d-flex justify-content-end">
+  <div class="col-md-12 d-flex justify-content-between">
+    <button mat-raised-button color="warn" (click)="back()">
+      <mat-icon>backspace</mat-icon>  &nbsp;ย้อนกลับ
+    </button>
     <button mat-raised-button color="accent" (click)="download()">
-      ดาวน์โหลด
+      <mat-icon>cloud_download</mat-icon> &nbsp;ดาวน์โหลด
     </button>
   </div>
 </div>
 
-<mat-progress-spinner color="primary" mode="indeterminate" [hidden]="!loading">
-</mat-progress-spinner>
+
 
 <div
   class="row mb-3 mt-4 ms-1 mx-1"
@@ -20,12 +22,12 @@
   id="image"
   [ngStyle]="{ 'background-image': background_image }"
 >
-  <div class="col-md-12 d-flex flex-row p-0">
+  <div class="col-md-12 d-flex flex-row p-0" [ngStyle]="{ 'background-color': background_color }">
     <img [src]="shiki" style="width: 30%; height: auto" *ngIf="shiki"/>
     <div
       class="d-flex flex-column"
       style="padding: 20px; width: 100%"
-      [ngStyle]="{ 'background-color': background_color }"
+      
     >
       <ng-container *ngFor="let i of data">
         <div class="pb-3" *ngIf="i.set_name">
@@ -44,34 +46,36 @@
     <div
       class="pt-3 pb-3"
       style="width: 100%"
-      [ngStyle]="{ 'background-color': background_color }"
+      *ngIf="detail"
+
     >
-      <h2><b>รายละเอียดเพิ่มเติม</b></h2>
+      <h2><b>รายละเอียด</b></h2>
       <p>{{ detail }}</p>
     </div>
   </div>
 </div>
 
 <div class="row pt-3 pb-1">
-  <div class="col-md-12 d-flex justify-content-between">
+  <div class="col-md-6 offset-md-6 d-flex justify-content-between">
     <button mat-raised-button color="primary" (click)="code_color()">
-      สีพื้นหลัง
+      <mat-icon>settings_brightness</mat-icon> &nbsp;สีพื้นหลัง
     </button>
-    <button mat-raised-button color="primary" (click)="change_background()">
-      ภาพพื้นหลัง
+    <button mat-raised-button color="primary" (click)="change_background()" [ngStyle]="{'opacity': background_image ? '1' : '0.6'}">
+      <mat-icon>perm_media</mat-icon> &nbsp;ภาพพื้นหลัง
     </button>
-    <button mat-raised-button color="primary" (click)="change_shiki()">
-      ชิกิงามิ
+    <button mat-raised-button color="primary" (click)="change_shiki()" [ngStyle]="{'opacity': shiki ? '1' : '0.6'}">
+      <mat-icon>perm_identity</mat-icon> ชิกิงามิ
     </button>
   </div>
 </div>
 
 <div class="row pt-3 pb-5">
   <div class="col-md-6">
-    <p *ngFor="let i of data">
+    <p *ngFor="let i of data" class="pb-3">
       <mat-form-field appearance="outline">
         <mat-label>ชื่อเซ็ต</mat-label>
         <input matInput placeholder="ตั้งชื่อเซ็ต" [(ngModel)]="i.set_name" />
+        <mat-icon matSuffix>stars</mat-icon>
       </mat-form-field>
       <img
         *ngFor="let item of i"

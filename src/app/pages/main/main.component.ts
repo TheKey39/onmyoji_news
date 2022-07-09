@@ -15,18 +15,27 @@ import Swal from 'sweetalert2';
 export class MainComponent implements OnInit {
   items: any;
   hidden: any = false;
-  set: any = [[]];
+  set: any = sessionStorage.getItem('item');
   select_set: any = 0;
   class: any;
 
   constructor(private service: ApiService) {
+    this.set = JSON.parse(this.set) || [[]];
     this.service.Get('Items/GetAllItems').subscribe((res) => {
       this.items = res;
     });
   }
 
+  to_top() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
   add_set() {
-    this.set.push([]);
+    if (this.set.length < 6) this.set.push([]);
     this.select_set = this.set.length - 1;
   }
   drop(event: CdkDragDrop<string[]>) {
@@ -42,6 +51,9 @@ export class MainComponent implements OnInit {
 
   delete_set(index: any) {
     this.set.splice(index, 1);
+  }
+  delete_item(item_index: any, index: any) {
+    this.set[index].splice(item_index, 1);
   }
 
   add_item() {
@@ -76,8 +88,15 @@ export class MainComponent implements OnInit {
     }
   }
 
+  
+
   next() {
-    sessionStorage.setItem("item",JSON.stringify(this.set));
-    window.location.href="/result"
+    for (let i = 0; i < this.set?.length; i++) {
+      if(!this.set[i].length) {
+        this.delete_set(i)
+      }
+    }
+    sessionStorage.setItem('item', JSON.stringify(this.set));
+    window.location.href = '/result';
   }
 }
