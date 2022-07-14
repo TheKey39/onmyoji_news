@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  path = 'http://thekey39.com:10/api/';
+  // path = 'http://103.76.183.192:10/api/';
   // path = 'https://localhost:5001/api/';
+  path = 'https://www.thekey39.com/api/api/';
 
   constructor(private http: HttpClient) {}
   Post(path: any, data: any): Observable<any> {
