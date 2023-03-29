@@ -57,18 +57,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { MainComponent } from './pages/main/main.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { AddItemComponent } from './pages/add-item/add-item.component';
-import { ResultComponent } from './pages/result/result.component';
-
 import { NgxSpinnerModule } from "ngx-spinner";
-import { BookmarkComponent } from './pages/bookmark/bookmark.component';
+import { HomeComponent } from './pages/home/home.component';
+import { OutletFrontComponent } from './pages/outlet-front/outlet-front.component';
+import { OutletCmsComponent } from './pages/outlet-cms/outlet-cms.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, AddItemComponent, ResultComponent, BookmarkComponent],
+  declarations: [AppComponent, HomeComponent, OutletFrontComponent, OutletCmsComponent, RegisterComponent],
   imports: [
     NgxPaginationModule,
     SocialLoginModule,
@@ -120,6 +120,7 @@ import { BookmarkComponent } from './pages/bookmark/bookmark.component';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
+    CookieService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

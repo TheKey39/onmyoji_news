@@ -2,30 +2,40 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   // path = 'http://103.76.183.192:10/api/';
-  // path = 'https://localhost:5001/api/';
-  path = 'https://www.thekey39.com/api/api/';
+  path = 'http://localhost:8080/';
+  // path = 'https://www.thekey39.com/api/api/';
 
-  constructor(private http: HttpClient) {}
-  Post(path: any, data: any): Observable<any> {
-    let URL = this.path + path;
-    return this.http.post(URL, data);
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
+
+  SetUser(data: any) {
+    this.cookieService.set('user', btoa(JSON.stringify(data)));
   }
-  Put(path: any, data: any): Observable<any> {
-    let URL = this.path + path;
-    return this.http.put(URL, data);
+
+  GetUser() {
+    return this.cookieService.get('user') ? JSON.parse(atob(this.cookieService.get('user'))) : null;
   }
-  Get(path: any): Observable<any> {
-    let URL = this.path + path;
-    return this.http.get(URL);
+
+  Logout() {
+    this.cookieService.delete('user');
   }
-  Delete(path: any): Observable<any> {
-    let URL = this.path + path;
-    return this.http.delete(URL);
+
+  async Post(path: any, data: any) {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(this.path + path, data).subscribe(
+        (res) => {
+          resolve(res);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 }

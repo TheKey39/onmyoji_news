@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './pages/main/main.component';
-import { AddItemComponent } from './pages/add-item/add-item.component';
-import { ResultComponent } from './pages/result/result.component';
-import { BookmarkComponent } from './pages/bookmark/bookmark.component';
+import { HomeComponent } from './pages/home/home.component';
+import { OutletFrontComponent } from './pages/outlet-front/outlet-front.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'manage-set', component: MainComponent },
-  { path: 'add-item', component: AddItemComponent },
-  { path: 'result', component: ResultComponent },
-  { path: 'bookmark', component: BookmarkComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: '',
+    component: OutletFrontComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'register', component: RegisterComponent },
+  ],
+  },
 ];
 
 @NgModule({

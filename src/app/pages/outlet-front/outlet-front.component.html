@@ -1,0 +1,11 @@
+<mat-toolbar>
+    <div class="row w-100">
+        <div class="col-md-12 d-flex justify-content-between">
+            <span>Onmyoji</span>
+            <span (click)="signInWithFB()" *ngIf="!user">Login</span>
+            <span (click)="signOut()" *ngIf="user">Logout</span>
+        </div>
+    </div>
+ </mat-toolbar>
+
+<router-outlet></router-outlet>

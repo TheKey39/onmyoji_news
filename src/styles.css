@@ -9,6 +9,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.container-fluid {
+  padding: 30px;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -33,7 +37,6 @@ th {
   background-color: #3f51b5;
   color: white;
 }
-
 
 mat-icon {
   cursor: pointer;
