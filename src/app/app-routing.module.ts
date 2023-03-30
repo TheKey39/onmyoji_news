@@ -11,10 +11,18 @@ const routes: Routes = [
     path: '',
     component: OutletFrontComponent,
     children: [
-      { path: 'home', component: HomeComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-  ],
+      { path: 'home', component: HomeComponent, data: { state: 'home' } },
+      {
+        path: 'register',
+        component: RegisterComponent,
+        data: { state: 'register' },
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        data: { state: 'login' },
+      },
+    ],
   },
 ];
 

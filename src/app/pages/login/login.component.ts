@@ -36,7 +36,16 @@ export class LoginComponent implements OnInit {
       this.service.SetUser(response[0]);
       window.location.reload();
     } else {
-      Swal.fire('สวัสดี', '', 'success');
+      Swal.fire({
+        title: 'ไม่พบผู้ใช้ในระบบ',
+        text: '',
+        confirmButtonText: 'ตกลง',
+        confirmButtonColor: '#4267B2',
+        imageUrl:
+          'https://i.pinimg.com/originals/ec/4a/62/ec4a62252440001f1bec8aec4585d65e.gif',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 
@@ -79,7 +88,7 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500,
       }).then((result) => {
-        this.service.Href('home')
+        this.service.Href('home');
       });
     }
   }

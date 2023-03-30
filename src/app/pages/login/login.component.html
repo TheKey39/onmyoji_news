@@ -1,6 +1,6 @@
-<div class="container-fluid ">
-  <div class="row d-flex justify-content-center align-items-center pt-4">
-    <div class="col-md-4 d-flex justify-content-center">
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height:100vh">
+  <div class="row d-flex justify-content-center align-items-center w-100">
+    <div class="col-md-5 d-flex justify-content-center">
       <mat-card>
         <img
           mat-card-image
@@ -11,14 +11,14 @@
             <div class="col-md-12 d-flex justify-content-center">
               <mat-form-field appearance="outline">
                 <mat-label>ชื่อผู้ใช้งาน</mat-label>
-                <input matInput placeholder="กรอกชื่อผู้ใช้งานหรืออีเมล" [(ngModel)]="data.username"/>
+                <input matInput placeholder="กรอกชื่อผู้ใช้งานหรืออีเมล" [(ngModel)]="data.username" required/>
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
               </mat-form-field>
             </div>
             <div class="col-md-12 d-flex justify-content-center">
               <mat-form-field appearance="outline">
                 <mat-label>รหัสผ่าน</mat-label>
-                <input matInput placeholder="กรอกรหัสผ่าน" type="password" [(ngModel)]="data.password"/>
+                <input matInput placeholder="กรอกรหัสผ่าน" type="password" [(ngModel)]="data.password" required/>
                 <mat-icon matSuffix>vpn_key</mat-icon>
               </mat-form-field>
             </div>

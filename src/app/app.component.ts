@@ -6,6 +6,7 @@ import {
 } from 'angularx-social-login';
 import { ApiService } from './api.service';
 import Swal from 'sweetalert2';
+import { trigger, transition, useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+
   title = 'Onmyoji';
 
   constructor() {}

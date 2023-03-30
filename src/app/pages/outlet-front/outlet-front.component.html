@@ -1,11 +1,12 @@
 <div class="bg">
-  <mat-toolbar>
+  <mat-toolbar style="position: absolute; height: 7.5vh; z-index: 999">
     <div class="row w-100">
       <div class="col-md-12 d-flex justify-content-between align-items-center">
         <div>
           <img
             src="https://www.seekpng.com/png/full/431-4315486_blockbuster-rpg-onmyoji-launches-globally-from-netease-onmyoji.png"
-            style="height: 50px; width: auto"
+            style="height: 50px; width: auto; cursor: pointer"
+            (click)="href('home')"
           />
         </div>
 
@@ -15,5 +16,7 @@
     </div>
   </mat-toolbar>
 
-  <router-outlet></router-outlet>
+  <div [@moveFromTop]="getState(o)" [@moveFromBottom]="getState(o)">
+    <router-outlet #o="outlet"> </router-outlet>
+  </div>
 </div>
