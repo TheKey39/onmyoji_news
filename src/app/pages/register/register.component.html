@@ -1,3 +1,135 @@
-<div class="container-fluid">
-    Test
-</div>
+<form
+  class="container-fluid d-flex justify-content-center align-items-center"
+  [formGroup]="data"
+>
+  <div class="row d-flex justify-content-center align-items-center w-100">
+    <div class="col-md-5 d-flex justify-content-center">
+      <mat-card>
+        <mat-card-header>
+          <div class="row w-100">
+            <div class="col-md-12 d-flex justify-content-end pb-2">
+              <!-- <h3><b>สมัครผู้ใช้ใหม่</b></h3> -->
+              <img
+                src="https://www.seekpng.com/png/full/431-4315486_blockbuster-rpg-onmyoji-launches-globally-from-netease-onmyoji.png"
+                style="height: 50px; width: auto;"
+              />
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-footer>
+          <mat-progress-bar
+            mode="indeterminate"
+            *ngIf="cropping"
+          ></mat-progress-bar>
+        </mat-card-footer>
+        <mat-card-content>
+          <div class="row d-flex justify-content-center">
+            <div
+              class="col-md-12 d-flex justify-content-center pb-5"
+              *ngIf="!cropping"
+            >
+              <label>
+                <input
+                  type="file"
+                  (change)="fileChangeEvent($event)"
+                  style="display: none"
+                />
+                <img
+                  [src]="profile"
+                  class="profile"
+                />
+              </label>
+            </div>
+            <div
+              class="col-md-12 d-flex justify-content-center pb-3 pt-1"
+              *ngIf="cropping"
+            >
+              <image-cropper
+                style="max-height: 350px; width: auto"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="1 / 1"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+                [hidden]="!cropping"
+              ></image-cropper>
+            </div>
+            <div
+              class="col-md-12 d-flex justify-content-center pb-3 pt-2"
+              *ngIf="cropping"
+            >
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="cropping = !cropping"
+              >
+                ยืนยัน
+              </button>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>อีเมล</mat-label>
+                <input
+                  matInput
+                  placeholder="กรอกอีเมล"
+                  formControlName="email"
+                />
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>ชื่อผู้ใช้งาน</mat-label>
+                <input
+                  matInput
+                  placeholder="กรอกชื่อผู้ใช้งาน"
+                  formControlName="username"
+                />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>รหัสผ่าน</mat-label>
+                <input
+                  matInput
+                  placeholder="กรอกรหัสผ่าน"
+                  type="password"
+                  formControlName="password"
+                />
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>ยืนยันรหัสผ่าน</mat-label>
+                <input
+                  matInput
+                  placeholder="กรอกรหัสผ่านอีกครั้ง"
+                  type="password"
+                  formControlName="confirm_password"
+                />
+                <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="d-flex flex-row justify-content-end"
+            style="column-gap: 10px"
+          >
+            <button mat-flat-button color="warn" (click)="back()">
+              ย้อนกลับ
+            </button>
+            <button mat-flat-button color="primary" [disabled]="cropping" (click)="InsertUser()">
+              ยืนยัน
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</form>

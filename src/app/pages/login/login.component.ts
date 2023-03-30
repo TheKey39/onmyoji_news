@@ -6,6 +6,7 @@ import {
 } from 'angularx-social-login';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
-    private service: ApiService
+    private service: ApiService,
+    private fb: FormBuilder
   ) {
     this.authService.authState.subscribe((user) => {
       if (!user) {
@@ -27,7 +29,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  data: any = {};
+  data = this.fb.group({
+    username: [''],
+    password: [''],
+  });
 
   async LoginSocial(user: any) {
     user.social_id = user.id;
@@ -50,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   async Login() {
-    let response: any = await this.service.Post('Login', this.data);
+    let response: any = await this.service.Post('Login', this.data.value);
     console.log(response);
     if (!response?.length) {
       // Swal.fire({
@@ -95,5 +100,9 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  href(path: any) {
+    this.service.Href(path);
   }
 }

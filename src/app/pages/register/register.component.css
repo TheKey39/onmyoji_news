@@ -1,0 +1,8 @@
+.profile {
+  border-radius: 50%;
+  border: solid 2.5px black;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}

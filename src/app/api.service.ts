@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ApiService {
   // path = 'http://103.76.183.192:10/api/';
-  // path = 'http://localhost:8080/';
-  path = 'https://www.thekey39.com/api/';
+  path = 'http://localhost:80/';
+  // path = 'https://www.thekey39.com/api/';
 
   constructor(
     private http: HttpClient,

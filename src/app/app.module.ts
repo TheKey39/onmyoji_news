@@ -2,8 +2,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import {
   SocialLoginModule,
@@ -79,6 +80,7 @@ import { LoginComponent } from './pages/login/login.component';
     LoginComponent,
   ],
   imports: [
+    ImageCropperModule,
     NgxPaginationModule,
     SocialLoginModule,
     DragDropModule,
@@ -87,6 +89,7 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,

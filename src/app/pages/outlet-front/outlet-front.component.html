@@ -16,7 +16,7 @@
     </div>
   </mat-toolbar>
 
-  <div [@moveFromTop]="getState(o)" [@moveFromBottom]="getState(o)">
+  <div [@fromLeftEasing]="getState(o)" [@fromRightEasing]="getState(o)">
     <router-outlet #o="outlet"> </router-outlet>
   </div>
 </div>
