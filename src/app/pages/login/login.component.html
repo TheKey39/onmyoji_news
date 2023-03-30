@@ -1,0 +1,49 @@
+<div class="container-fluid ">
+  <div class="row d-flex justify-content-center align-items-center pt-4">
+    <div class="col-md-4 d-flex justify-content-center">
+      <mat-card>
+        <img
+          mat-card-image
+          src="https://cdn.cloudflare.steamstatic.com/steam/apps/551170/capsule_616x353.jpg?t=1589523174"
+        />
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>ชื่อผู้ใช้งาน</mat-label>
+                <input matInput placeholder="กรอกชื่อผู้ใช้งานหรืออีเมล" [(ngModel)]="data.username"/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+              <mat-form-field appearance="outline">
+                <mat-label>รหัสผ่าน</mat-label>
+                <input matInput placeholder="กรอกรหัสผ่าน" type="password" [(ngModel)]="data.password"/>
+                <mat-icon matSuffix>vpn_key</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 d-flex justify-content-between pb-3">
+              <small>ลืมรหัสผ่าน ?</small>
+              <small>สมัครสมาชิกใหม่</small>
+            </div>
+          </div>
+          <div class="d-flex flex-column" style="row-gap: 10px">
+            <button mat-flat-button color="warn" (click)="Login()">เข้าสู่ระบบ</button>
+            <button mat-button class="fb" (click)="signInWithFB()">
+              <div
+                class="d-flex justify-content-center align-items-center"
+                style="column-gap: 8px"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png"
+                  style="height: 20px; width: auto"
+                />
+                <div>เข้าสู่ระบบด้วย Facebook</div>
+              </div>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

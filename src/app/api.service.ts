@@ -9,8 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ApiService {
   // path = 'http://103.76.183.192:10/api/';
-  path = 'http://localhost:8080/';
-  // path = 'https://www.thekey39.com/api/api/';
+  // path = 'http://localhost:8080/';
+  path = 'https://www.thekey39.com/api/';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
@@ -26,6 +26,10 @@ export class ApiService {
     this.cookieService.delete('user');
   }
 
+  Href(path:any) {
+    window.location.href = './' + path;
+  }
+
   async Post(path: any, data: any) {
     return new Promise((resolve, reject) => {
       this.http.post<any>(this.path + path, data).subscribe(
@@ -33,7 +37,7 @@ export class ApiService {
           resolve(res);
         },
         (error) => {
-          reject(error);
+          resolve(error);
         }
       );
     });

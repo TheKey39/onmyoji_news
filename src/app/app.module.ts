@@ -5,13 +5,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider
+  FacebookLoginProvider,
 } from 'angularx-social-login';
 
-import {NgxPaginationModule} from 'ngx-pagination'
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -58,17 +61,23 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { HomeComponent } from './pages/home/home.component';
 import { OutletFrontComponent } from './pages/outlet-front/outlet-front.component';
 import { OutletCmsComponent } from './pages/outlet-cms/outlet-cms.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CookieService } from 'ngx-cookie-service';
-
-
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, OutletFrontComponent, OutletCmsComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    OutletFrontComponent,
+    OutletCmsComponent,
+    RegisterComponent,
+    LoginComponent,
+  ],
   imports: [
     NgxPaginationModule,
     SocialLoginModule,
@@ -116,7 +125,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -128,14 +137,14 @@ import { CookieService } from 'ngx-cookie-service';
         providers: [
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1132944480594895')
-          }
+            provider: new FacebookLoginProvider('1132944480594895'),
+          },
         ],
         onError: (err) => {
           console.error(err);
-        }
+        },
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

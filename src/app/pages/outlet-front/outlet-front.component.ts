@@ -21,7 +21,6 @@ export class OutletFrontComponent implements OnInit {
       if (!user) {
         return;
       }
-      this.LoginSocial(user);
     });
   }
 
@@ -29,23 +28,14 @@ export class OutletFrontComponent implements OnInit {
 
   user: any = this.service.GetUser();
 
-  async LoginSocial(user: any) {
-    user.social_id = user.id;
-    let response: any = await this.service.Post('LoginSocial', user);
-    if (response?.length) {
-      this.service.SetUser(response[0]);
-      window.location.reload();
-    }
-  }
-
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
   signOut(): void {
     this.authService.signOut();
     this.service.Logout();
     localStorage.clear();
     window.location.reload();
+  }
+
+  href(path: any) {
+    this.service.Href(path);
   }
 }

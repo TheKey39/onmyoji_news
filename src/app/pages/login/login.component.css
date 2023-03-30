@@ -1,0 +1,13 @@
+::ng-deep .mat-form-field-wrapper{
+    margin-bottom: unset !important;
+ }
+
+ small {
+    cursor: pointer;
+ }
+
+ .centered {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+  }

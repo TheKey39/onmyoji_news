@@ -1,0 +1,18 @@
+small {
+    cursor:pointer;
+    color:white
+}
+
+.bg {
+    background-image: url("https://i.pinimg.com/originals/33/8f/24/338f249dfb34aaf3d8bcf153222583a8.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position:absolute;
+    width:100%
+  }
+
+  mat-toolbar{
+    background-color: rgba(0, 0, 0, 0.133);
+  }
