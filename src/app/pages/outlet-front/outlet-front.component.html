@@ -11,7 +11,12 @@
         </div>
 
         <small (click)="href('login')" *ngIf="!user">เข้าสู่ระบบ</small>
-        <small (click)="signOut()" *ngIf="user">ออกจากระบบ</small>
+        
+        <div *ngIf="user" class="d-flex flex-row" style="column-gap:10px;">
+          <small>{{user.username}}</small>
+          <small (click)="signOut()" >ออกจากระบบ</small>
+        </div>
+      
       </div>
     </div>
   </mat-toolbar>

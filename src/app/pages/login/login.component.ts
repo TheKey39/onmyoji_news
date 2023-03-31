@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   data = this.fb.group({
-    username: [''],
-    password: [''],
+    username: ['', [Validators.required]],
+    password: ['',[Validators.required]],
   });
 
   async LoginSocial(user: any) {
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     let response: any = await this.service.Post('LoginSocial', user);
     if (response?.length) {
       this.service.SetUser(response[0]);
-      window.location.reload();
+      window.location.href = './home';
     } else {
       Swal.fire({
         title: 'ไม่พบผู้ใช้ในระบบ',
@@ -55,23 +55,12 @@ export class LoginComponent implements OnInit {
   }
 
   async Login() {
+    if(this.data.invalid) {
+      return
+    }
     let response: any = await this.service.Post('Login', this.data.value);
     console.log(response);
     if (!response?.length) {
-      // Swal.fire({
-      //   title: 'ไม่พบผู้ใช้ในระบบ',
-      //   color: '#716add',
-      //   confirmButtonText: 'ตกลง',
-      //   confirmButtonColor: '#4267B2',
-      //   // background: '#fff url(/images/trees.png)',
-      //   backdrop: `
-      //     rgba(0,0,100,0.3)
-      //     url("https://i.pinimg.com/originals/ec/4a/62/ec4a62252440001f1bec8aec4585d65e.gif")
-      //     center top
-      //     no-repeat
-      //   `,
-      // });
-
       Swal.fire({
         title: 'ไม่พบผู้ใช้ในระบบ',
         text: '',
@@ -93,7 +82,8 @@ export class LoginComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500,
       }).then((result) => {
-        this.service.Href('home');
+        this.service.SetUser(response[0]);
+        window.location.href = './home';
       });
     }
   }
