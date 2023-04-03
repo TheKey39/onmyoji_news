@@ -69,6 +69,7 @@ import { OutletCmsComponent } from './pages/outlet-cms/outlet-cms.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './pages/login/login.component';
+import {AngularStickyThingsModule} from '@w11k/angular-sticky-things';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { LoginComponent } from './pages/login/login.component';
     LoginComponent,
   ],
   imports: [
+    AngularStickyThingsModule,
     ImageCropperModule,
     NgxPaginationModule,
     SocialLoginModule,

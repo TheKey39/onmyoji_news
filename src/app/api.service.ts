@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ApiService {
   // path = 'http://103.76.183.192:10/api/';
-  // path = 'http://localhost:80/';
-  path = 'https://www.thekey39.com/api/';
+  path = 'http://localhost:80/';
+  // path = 'https://www.thekey39.com/api/';
 
   constructor(
     private http: HttpClient,
@@ -29,6 +29,10 @@ export class ApiService {
       : null;
   }
 
+  GetToken() {
+    return this.cookieService.get('user') ? this.cookieService.get('user') : '';
+  }
+
   Logout() {
     localStorage.clear();
     window.location.reload();
@@ -42,6 +46,8 @@ export class ApiService {
 
   async Post(path: any, data: any) {
     return new Promise((resolve, reject) => {
+      data.token = this.GetToken();
+
       this.http.post<any>(this.path + path, data).subscribe(
         (res) => {
           resolve(res);
