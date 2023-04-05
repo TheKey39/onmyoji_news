@@ -11,17 +11,18 @@ export class HomeComponent implements OnInit {
   constructor(private service: ApiService) {}
 
   user: any = this.service.GetUser();
+  news:any;
 
   ngOnInit(): void {
     this.GetAllNews();
   }
 
   async GetAllNews() {
-    let response:any = await this.service.Post('GetAllNews', {
-      limit: '2',
+    let response: any = await this.service.Post('GetAllNews', {
+      limit: '10',
       page: '0',
     });
-    console.log(response);
+    this.news = response
   }
 
   href(path: any) {

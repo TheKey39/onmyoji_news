@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -44,16 +45,29 @@ export class ApiService {
     // window.location.href = './' + path;
   }
 
+  async Swal(title: any, icon: any, f: any) {
+    await Swal.fire({
+      title: title,
+      confirmButtonText: 'ตกลง',
+      confirmButtonColor: '#4267B2',
+      showConfirmButton: false,
+      icon: icon,
+      timer: 1500,
+    }).then((result) => {
+      f;
+    });
+  }
+
   async Post(path: any, data: any) {
     return new Promise((resolve, reject) => {
-      data.token = this.GetToken();
+      path = path + '?token=' + this.GetToken();
 
       this.http.post<any>(this.path + path, data).subscribe(
         (res) => {
           resolve(res);
         },
         (error) => {
-          resolve(error);
+          resolve(false);
         }
       );
     });

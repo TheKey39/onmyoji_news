@@ -27,11 +27,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  user:any = this.service.GetUser()
+
+  ngOnInit(): void {
+    if(this.user) {
+      this.service.Href('home')
+    }
+  }
 
   data = this.fb.group({
     username: ['', [Validators.required]],
-    password: ['',[Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   async LoginSocial(user: any) {
@@ -41,50 +47,26 @@ export class LoginComponent implements OnInit {
       this.service.SetUser(response[0]);
       window.location.href = './home';
     } else {
-      Swal.fire({
-        title: 'ไม่พบผู้ใช้ในระบบ',
-        text: '',
-        confirmButtonText: 'ตกลง',
-        confirmButtonColor: '#4267B2',
-        imageUrl:
-          'https://i.pinimg.com/originals/ec/4a/62/ec4a62252440001f1bec8aec4585d65e.gif',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      await this.service.Swal(`ไม่พบผู้ใช้ในระบบ`, 'error', null);
     }
   }
 
   async Login() {
-    if(this.data.invalid) {
-      return
+    if (this.data.invalid) {
+      return;
     }
     let response: any = await this.service.Post('Login', this.data.value);
     console.log(response);
     if (!response?.length) {
-      Swal.fire({
-        title: 'ไม่พบผู้ใช้ในระบบ',
-        text: '',
-        confirmButtonText: 'ตกลง',
-        confirmButtonColor: '#4267B2',
-        imageUrl:
-          'https://i.pinimg.com/originals/ec/4a/62/ec4a62252440001f1bec8aec4585d65e.gif',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      await this.service.Swal('ไม่พบผู้ใช้ในระบบ', 'error', null);
     } else {
-      Swal.fire({
-        title: 'ยินดีต้อนรับ',
-        text: `( ${response[0].username} )`,
-        confirmButtonText: 'ตกลง',
-        confirmButtonColor: '#4267B2',
-        imageUrl:
-          'https://4.bp.blogspot.com/-_1oQJ81NkXY/XH4mOkTf92I/AAAAAAAxaSs/ghM1OaNtg3E2DYIQdh2gDjSNNjRZwwKfgCLcBGAs/s1600/AW3625434_00.gif',
-        showConfirmButton: false,
-        timer: 1500,
-      }).then((result) => {
-        this.service.SetUser(response[0]);
-        window.location.href = './home';
-      });
+      response[0]?.image ? delete response[0]?.image : null;
+      this.service.SetUser(response[0]);
+      await this.service.Swal(
+        `ยินดีต้อนรับ ( ${response[0].username} )`,
+        'success',
+        (window.location.href = './home')
+      );
     }
   }
 

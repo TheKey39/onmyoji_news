@@ -70,6 +70,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './pages/login/login.component';
 import {AngularStickyThingsModule} from '@w11k/angular-sticky-things';
+import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {AngularStickyThingsModule} from '@w11k/angular-sticky-things';
     OutletCmsComponent,
     RegisterComponent,
     LoginComponent,
+    NewsDetailComponent,
   ],
   imports: [
     AngularStickyThingsModule,

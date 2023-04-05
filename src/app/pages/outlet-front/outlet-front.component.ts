@@ -7,7 +7,12 @@ import {
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { fromLeftEasing, fromRightEasing } from 'ngx-router-animations';
+import {
+  fromLeftEasing,
+  fromRightEasing,
+  fromTopEasing,
+  fromBottomEasing,
+} from 'ngx-router-animations';
 
 @Component({
   selector: 'app-outlet-front',
@@ -18,9 +23,16 @@ import { fromLeftEasing, fromRightEasing } from 'ngx-router-animations';
       transition('* => home', useAnimation(fromLeftEasing)),
       transition('register => login', useAnimation(fromLeftEasing)),
     ]),
+    trigger('fromTopEasing', [
+      transition('news-detail => home', useAnimation(fromTopEasing)),
+    ]),
+    trigger('fromBottomEasing', [
+      transition('home => news-detail', useAnimation(fromBottomEasing)),
+    ]),
     trigger('fromRightEasing', [
       transition('home => login', useAnimation(fromRightEasing)),
       transition('login => register', useAnimation(fromRightEasing)),
+      transition('home => news-detail', useAnimation(fromRightEasing)),
     ]),
   ],
 })

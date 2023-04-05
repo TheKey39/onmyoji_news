@@ -1,0 +1,26 @@
+<div class="container-fluid topper">
+  <div class="row">
+    <div class="col-md-2 pt-3">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+              <div class="d-flex flex-column" style="row-gap: 10px">
+                <img [src]="data?.image" class="profile text-center" />
+                <b class="text-center">{{ data?.username }}</b>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-6 d-flex flex-column pt-3" style="row-gap: 10px">
+      <img
+        [src]="data?.image_path"
+        style="height: auto; width: 100%; object-fit: cover"
+      />
+      <b>{{ data?.title }}</b>
+      <div [innerHTML]="data?.detail"></div>
+    </div>
+  </div>
+</div>
