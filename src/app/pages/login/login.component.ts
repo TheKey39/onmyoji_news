@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     user.social_id = user.id;
     let response: any = await this.service.Post('LoginSocial', user);
     if (response?.length) {
-      this.service.SetUser(response[0]);
+      this.service.SetUser(response[0].token.token);
       window.location.href = './home';
     } else {
       await this.service.Swal(`ไม่พบผู้ใช้ในระบบ`, 'error', null);
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       await this.service.Swal('ไม่พบผู้ใช้ในระบบ', 'error', null);
     } else {
       response[0]?.image ? delete response[0]?.image : null;
-      this.service.SetUser(response[0]);
+      this.service.SetUser(response[0].token.token);
       await this.service.Swal(
         `ยินดีต้อนรับ ( ${response[0].username} )`,
         'success',

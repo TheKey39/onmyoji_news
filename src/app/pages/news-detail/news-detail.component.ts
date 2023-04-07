@@ -24,6 +24,7 @@ export class NewsDetailComponent implements OnInit {
   ngOnInit(): void {
     this.GetNewsById();
     this.GetCommentByHostId();
+    this.UpdateView();
   }
 
   async GetNewsById() {
@@ -34,9 +35,14 @@ export class NewsDetailComponent implements OnInit {
     }
     this.data = response[0]
   }
+
   async GetCommentByHostId() {
     let response: any = await this.service.Post('GetCommentByHostId', { id: this.id });
     this.comments = response
     console.log(this.comments)
+  }
+
+  async UpdateView() {
+    let response: any = await this.service.Post('UpdateView', { id: this.id });
   }
 }

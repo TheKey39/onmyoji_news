@@ -21,23 +21,23 @@ export class ApiService {
   ) {}
 
   SetUser(data: any) {
-    this.cookieService.set('user', btoa(JSON.stringify(data)));
+    console.log(data);
+    sessionStorage.setItem('user', data);
   }
 
   GetUser() {
-    return this.cookieService.get('user')
-      ? JSON.parse(atob(this.cookieService.get('user')))
+    return sessionStorage.getItem('user')
+      ? JSON.parse(atob(sessionStorage.getItem('user') || ""))
       : null;
   }
 
   GetToken() {
-    return this.cookieService.get('user') ? this.cookieService.get('user') : '';
+    return sessionStorage.getItem('user') ? sessionStorage.getItem('user') : '';
   }
 
   Logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
-    this.cookieService.delete('user');
   }
 
   Href(path: any) {
