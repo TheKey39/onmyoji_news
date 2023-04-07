@@ -1,7 +1,23 @@
 <div class="container-fluid topper">
+  <div class="row pb-2">
+    <div
+      class="col-md-6 d-flex flex-row align-items-center"
+      style="column-gap: 10px;height:100%"
+    >
+      <mat-form-field appearance="outline">
+        <input matInput (keydown.enter)="GetAllNews()" [(ngModel)]="search"/>
+        <mat-label>ค้นหา</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-3 mt-3" *ngFor="let i of news">
-      <mat-card class="h-100" style="cursor: pointer;" (click)="href('news-detail/' + i.id)">
+      <mat-card
+        class="h-100"
+        style="cursor: pointer"
+        (click)="href('news-detail/' + i.id)"
+      >
         <div class="row">
           <div
             class="col-md-12 d-flex justify-content-center d-flex flex-column"
@@ -25,7 +41,7 @@
         </div>
 
         <mat-card-actions align="end">
-          <div class="d-flex align-items-center" style="column-gap:5px">
+          <div class="d-flex align-items-center" style="column-gap: 5px">
             <mat-icon>remove_red_eye</mat-icon> <small>{{ i.views }}</small>
           </div>
         </mat-card-actions>

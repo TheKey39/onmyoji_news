@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   user: any = this.service.GetUser();
   news:any;
+  search:any = ""
 
   ngOnInit(): void {
     this.GetAllNews();
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
     let response: any = await this.service.Post('GetAllNews', {
       limit: '10',
       page: '0',
+      search: this.search ?? null
     });
     this.news = response
   }
