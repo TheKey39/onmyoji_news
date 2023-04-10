@@ -72,6 +72,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AngularStickyThingsModule } from '@w11k/angular-sticky-things';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { AddNewsComponent } from './pages/add-news/add-news.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { AddNewsComponent } from './pages/add-news/add-news.component';
     AddNewsComponent,
   ],
   imports: [
+    AngularEditorModule,
     NgxPaginationModule,
     AngularStickyThingsModule,
     ImageCropperModule,

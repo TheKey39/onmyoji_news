@@ -8,6 +8,10 @@
   font-family: "Athiti", sans-serif;
 }
 
+.mat-card-image {
+  width: calc(100% + 32.5px) !important;
+}
+
 .ngx-pagination {
   padding-left: 0px !important;
   color:white;
