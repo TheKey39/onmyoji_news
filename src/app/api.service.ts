@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +19,14 @@ export class ApiService {
   path = 'http://localhost:80/';
   // path = 'https://www.thekey39.com/api/';
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   SetUser(data: any) {
@@ -27,7 +36,7 @@ export class ApiService {
 
   GetUser() {
     return sessionStorage.getItem('user')
-      ? JSON.parse(atob(sessionStorage.getItem('user') || ""))
+      ? JSON.parse(atob(sessionStorage.getItem('user') || ''))
       : null;
   }
 
@@ -43,6 +52,15 @@ export class ApiService {
   Href(path: any) {
     this.router.navigate([path]);
     // window.location.href = './' + path;
+  }
+
+  async Snack(text:any,f: any) {
+    await this._snackBar.open(text, 'ตกลง', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3 * 1000,
+    });
+    f;
   }
 
   async Swal(title: any, icon: any, f: any) {

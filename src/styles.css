@@ -8,6 +8,30 @@
   font-family: "Athiti", sans-serif;
 }
 
+.ngx-pagination {
+  padding-left: 0px !important;
+  color:white;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+  color: #ffffff !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  background: #17a2b8 !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+}
+
+.ngx-pagination .current:hover {
+  background: #17a2b8 !important;
+  border-radius: 20px !important; 
+  border: transparent !important;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -27,7 +51,7 @@
 }
 
 .container-fluid{
-  height:100vh;
+  min-height:100vh;
   width:100vw;
 }
 

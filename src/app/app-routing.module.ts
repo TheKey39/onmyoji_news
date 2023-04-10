@@ -6,6 +6,7 @@ import { OutletCmsComponent } from './pages/outlet-cms/outlet-cms.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { AddNewsComponent } from './pages/add-news/add-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +30,11 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         data: { state: 'login' },
+      },
+      {
+        path: 'add-news',
+        component: AddNewsComponent,
+        data: { state: 'add-news' },
       },
     ],
   },

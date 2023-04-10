@@ -25,9 +25,11 @@ import {
     ]),
     trigger('fromTopEasing', [
       transition('news-detail => home', useAnimation(fromTopEasing)),
+      transition('add-news => home', useAnimation(fromTopEasing)),
     ]),
     trigger('fromBottomEasing', [
       transition('home => news-detail', useAnimation(fromBottomEasing)),
+      transition('home => add-news', useAnimation(fromBottomEasing)),
     ]),
     trigger('fromRightEasing', [
       transition('home => login', useAnimation(fromRightEasing)),

@@ -8,6 +8,8 @@ import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private service: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+
   ) {
     this.authService.authState.subscribe((user) => {
       if (!user) {
@@ -26,6 +29,8 @@ export class LoginComponent implements OnInit {
       this.LoginSocial(user);
     });
   }
+
+
 
   user:any = this.service.GetUser()
 
@@ -62,11 +67,12 @@ export class LoginComponent implements OnInit {
     } else {
       response[0]?.image ? delete response[0]?.image : null;
       this.service.SetUser(response[0].token.token);
-      await this.service.Swal(
-        `ยินดีต้อนรับ ( ${response[0].username} )`,
-        'success',
-        (window.location.href = './home')
-      );
+      this.service.Snack(`ยินดีต้อนรับ ( ${response[0].username} )`,window.location.href = './home')
+      // await this.service.Swal(
+      //   `ยินดีต้อนรับ ( ${response[0].username} )`,
+      //   'success',
+      //   (window.location.href = './home')
+      // );
     }
   }
 

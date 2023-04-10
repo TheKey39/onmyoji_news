@@ -1,18 +1,45 @@
 <div class="container-fluid topper">
-  <div class="row pb-2">
-    <div
-      class="col-md-6 d-flex flex-row align-items-center"
-      style="column-gap: 10px;height:100%"
-    >
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-center">
       <mat-form-field appearance="outline">
-        <input matInput (keydown.enter)="GetAllNews()" [(ngModel)]="search"/>
+        <input
+          matInput
+          (keydown.enter)="GetAllNews((p = 1)); CountNews()"
+          [(ngModel)]="search"
+        />
         <mat-label>ค้นหา</mat-label>
         <mat-icon matPrefix>search</mat-icon>
       </mat-form-field>
     </div>
+    <div class="col-md-5 d-flex align-items-center">
+      <mat-form-field appearance="outline">
+        <mat-label>ประเภท</mat-label>
+        <mat-select
+          [(ngModel)]="region_id"
+          (selectionChange)="GetAllNews((p = 1)); CountNews()"
+        >
+          <mat-option value="0">ทั้งหมด</mat-option>
+          <mat-option *ngFor="let i of region" [value]="i.region_id">{{
+            i.region_name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 d-flex align-items-start justify-content-end">
+      <button mat-raised-button color="primary" style="height:53px;margin-top:3px;width:100%" (click)="href('add-news')">
+        <mat-icon>plus_one</mat-icon>
+      </button>
+    </div>
   </div>
   <div class="row">
-    <div class="col-md-3 mt-3" *ngFor="let i of news">
+    <div
+      class="col-md-3 mt-3"
+      *ngFor="
+        let i of news
+          | paginate
+            : { itemsPerPage: limit, currentPage: p, totalItems: total }
+      "
+    >
       <mat-card
         class="h-100"
         style="cursor: pointer"
@@ -26,13 +53,13 @@
             <div class="parent">
               <img
                 [src]="i.image_path"
-                style="height: 20vh; width: 100%; object-fit: cover"
+                style="height: 15vh; width: 100%; object-fit: cover"
               />
               <img class="child" [src]="i.region_image" />
-              <img
+              <!-- <img
                 class="role_child"
                 src="https://www.pngkit.com/png/full/424-4240023_best-hot-price-new-.png"
-              />
+              /> -->
             </div>
 
             <b class="max-2">{{ i.title }}</b>
@@ -46,6 +73,16 @@
           </div>
         </mat-card-actions>
       </mat-card>
+    </div>
+  </div>
+
+  <div class="row pt-4">
+    <div class="col-md-12 d-flex justify-content-end">
+      <pagination-controls
+        (pageChange)="GetAllNews((p = $event))"
+        previousLabel=""
+        nextLabel=""
+      ></pagination-controls>
     </div>
   </div>
 </div>

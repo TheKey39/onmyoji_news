@@ -4,10 +4,10 @@ small {
 }
 
 .bg {
-    background-image: url("https://i.pinimg.com/originals/33/8f/24/338f249dfb34aaf3d8bcf153222583a8.jpg");
-    height: 100%; 
+    background-image: url("https://i.pinimg.com/originals/73/ef/40/73ef404ed366af8f7a6e83bebb2452fb.jpg");
+    min-height: 100%; 
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-size: cover;
     position:absolute;
     width:100%

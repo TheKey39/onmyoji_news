@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -69,8 +69,9 @@ import { OutletCmsComponent } from './pages/outlet-cms/outlet-cms.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './pages/login/login.component';
-import {AngularStickyThingsModule} from '@w11k/angular-sticky-things';
+import { AngularStickyThingsModule } from '@w11k/angular-sticky-things';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { AddNewsComponent } from './pages/add-news/add-news.component';
 
 @NgModule({
   declarations: [
@@ -81,8 +82,10 @@ import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
     RegisterComponent,
     LoginComponent,
     NewsDetailComponent,
+    AddNewsComponent,
   ],
   imports: [
+    NgxPaginationModule,
     AngularStickyThingsModule,
     ImageCropperModule,
     NgxPaginationModule,
