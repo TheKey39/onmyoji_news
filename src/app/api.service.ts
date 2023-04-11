@@ -10,6 +10,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class ApiService {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
+    private spinner: NgxSpinnerService,
     private http: HttpClient,
     private cookieService: CookieService,
     private router: Router,
@@ -77,14 +79,17 @@ export class ApiService {
   }
 
   async Post(path: any, data: any) {
+    this.spinner.show();
     return new Promise((resolve, reject) => {
       path = path + '?token=' + this.GetToken();
 
       this.http.post<any>(this.path + path, data).subscribe(
         (res) => {
+          this.spinner.hide()
           resolve(res);
         },
         (error) => {
+          this.spinner.hide()
           resolve(false);
         }
       );

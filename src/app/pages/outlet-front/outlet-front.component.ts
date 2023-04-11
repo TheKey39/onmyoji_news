@@ -14,6 +14,7 @@ import {
   fromBottomEasing,
 } from 'ngx-router-animations';
 
+
 @Component({
   selector: 'app-outlet-front',
   templateUrl: './outlet-front.component.html',
