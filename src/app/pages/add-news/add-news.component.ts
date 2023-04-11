@@ -12,8 +12,12 @@ export class AddNewsComponent implements OnInit {
   constructor(private service: ApiService, private fb: FormBuilder) {}
 
   region: any;
+  info: any;
   ngOnInit(): void {
     this.GetRegion();
+    if (!this.service.GetUser()) {
+      this.service.Href('home')
+    }
   }
 
   data = this.fb.group({
@@ -23,10 +27,15 @@ export class AddNewsComponent implements OnInit {
     image_path: [
       'https://w0.peakpx.com/wallpaper/21/752/HD-wallpaper-video-game-onmyoji.jpg',
     ],
+    info: [''],
+    created_date: [new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()],
+    created_by: [this.service.GetUser()?.id],
   });
 
   async fileChangeEvent(event: any) {
-    this.data.controls['image_path'].setValue(await this.convertBase64(event.target.files[0]));
+    this.data.controls['image_path'].setValue(
+      await this.convertBase64(event.target.files[0])
+    );
     console.log(this.data.value);
   }
 
@@ -45,6 +54,22 @@ export class AddNewsComponent implements OnInit {
     });
   }
 
+  async InsertNews() {
+    if (this.data.invalid) {
+      return;
+    }
+    if (!this.data.value.info) {
+      this.data.value.info = '-'
+    }
+    this.data.value.status = 1;
+    let response: any = await this.service.Post('InsertNews', this.data.value);
+    if (response) {
+      this.service.Snack(`เพิ่มข่าวสำเร็จ`, (this.service.Href('home')));
+    } else {
+      this.service.Snack(`กรุณาติดต่อแอดมิน`,null)
+    }
+  }
+
   async GetRegion() {
     let response: any = await this.service.Post('GetRegion', {});
     this.region = response;
@@ -53,7 +78,7 @@ export class AddNewsComponent implements OnInit {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    minHeight: '30vh',
+    minHeight: '55vh',
     defaultFontName: 'Athiti',
   };
 }

@@ -29,13 +29,13 @@ import {
       transition('add-news => home', useAnimation(fromTopEasing)),
     ]),
     trigger('fromBottomEasing', [
-      transition('home => news-detail', useAnimation(fromBottomEasing)),
-      transition('home => add-news', useAnimation(fromBottomEasing)),
+      transition('* => news-detail', useAnimation(fromBottomEasing)),
+      transition('* => add-news', useAnimation(fromBottomEasing)),
+      transition('* => register', useAnimation(fromBottomEasing)),
     ]),
     trigger('fromRightEasing', [
-      transition('home => login', useAnimation(fromRightEasing)),
-      transition('login => register', useAnimation(fromRightEasing)),
-      transition('home => news-detail', useAnimation(fromRightEasing)),
+      transition('* => login', useAnimation(fromRightEasing)),
+      
     ]),
   ],
 })
@@ -66,5 +66,8 @@ export class OutletFrontComponent implements OnInit {
 
   href(path: any) {
     this.service.Href(path);
+  }
+  hrefback() {
+    this.service.HrefBack();
   }
 }

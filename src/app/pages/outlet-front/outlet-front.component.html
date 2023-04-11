@@ -2,27 +2,40 @@
   <mat-toolbar style="position: absolute; height: 7.5vh; z-index: 999">
     <div class="row w-100">
       <div class="col-md-12 d-flex justify-content-between align-items-center">
-        <div>
-          <img
+        <div
+          class="d-flex align-items-center"
+          style="
+            column-gap: 20px;
+            padding-left: 10px;
+            color: white;
+            opacity: 0.98;
+          "
+        >
+          <!-- <img
             src="https://www.seekpng.com/png/full/431-4315486_blockbuster-rpg-onmyoji-launches-globally-from-netease-onmyoji.png"
             style="height: 50px; width: auto; cursor: pointer"
             (click)="href('home')"
-          />
+          /> -->
+          <mat-icon (click)="hrefback()">arrow_back</mat-icon>
+          <mat-icon (click)="href('home')">home</mat-icon>
         </div>
 
         <small (click)="href('login')" *ngIf="!user">เข้าสู่ระบบ</small>
-        
-        <div *ngIf="user" class="d-flex flex-row" style="column-gap:10px;">
-          <small>{{user.username}}</small>
-          <small (click)="signOut()" >ออกจากระบบ</small>
+
+        <div *ngIf="user" class="d-flex flex-row" style="column-gap: 10px">
+          <small>{{ user.username }}</small>
+          <small (click)="signOut()">ออกจากระบบ</small>
         </div>
-      
       </div>
     </div>
   </mat-toolbar>
 
-  <div [@fromLeftEasing]="getState(o)" [@fromRightEasing]="getState(o)" [@fromTopEasing]="getState(o)" [@fromBottomEasing]="getState(o)">
+  <div
+    [@fromLeftEasing]="getState(o)"
+    [@fromRightEasing]="getState(o)"
+    [@fromTopEasing]="getState(o)"
+    [@fromBottomEasing]="getState(o)"
+  >
     <router-outlet #o="outlet"> </router-outlet>
   </div>
 </div>
-

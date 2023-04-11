@@ -55,6 +55,10 @@ export class ApiService {
     this.router.navigate([path]);
     // window.location.href = './' + path;
   }
+  HrefBack() {
+    this.router.navigate([".."]);
+    // window.location.href = './' + path;
+  }
 
   async Snack(text:any,f: any) {
     await this._snackBar.open(text, 'ตกลง', {

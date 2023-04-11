@@ -1,8 +1,7 @@
 <div class="container-fluid topper" [formGroup]="data">
   <div class="row">
-    <div class="col-md-12">
-      <mat-card style="opacity: 0.975; padding-top: 0">
-        
+    <div class="col-md-4 mt-2 d-flex">
+      <mat-card style="opacity: 0.975; padding-top: 0; width: 100%">
         <label style="width: 100%">
           <input
             type="file"
@@ -12,10 +11,15 @@
           <img
             mat-card-image
             [src]="data.value.image_path"
-            style="height: auto; object-fit: cover; cursor: pointer"
+            style="
+              height: auto;
+              width: 100%;
+              object-fit: cover;
+              cursor: pointer;
+            "
           />
         </label>
-        <mat-card-content class="p-3">
+        <mat-card-content class="p-3 pb-0">
           <div class="row">
             <div class="col-md-6 d-flex justify-content-center">
               <mat-form-field appearance="outline">
@@ -30,7 +34,7 @@
             </div>
             <div class="col-md-6 d-flex justify-content-center">
               <mat-form-field appearance="outline">
-                <mat-label>หัวข้อ</mat-label>
+                <mat-label>ประเภท</mat-label>
                 <mat-select formControlName="region_id">
                   <mat-option *ngFor="let i of region" [value]="i.region_id">{{
                     i.region_name
@@ -39,16 +43,36 @@
               </mat-form-field>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-12">
-              <angular-editor
-                [config]="config"
-                formControlName="detail"
-              ></angular-editor>
+              <mat-form-field appearance="outline">
+                <mat-label>รายละเอียด</mat-label>
+                <textarea matInput formControlName="info" rows="6"></textarea>
+              </mat-form-field>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+    </div>
+
+    <div class="col-md-8 mt-2 d-flex">
+      <mat-card style="opacity: 0.975">
+        <mat-card-content class="p-3">
+          <angular-editor
+            [config]="config"
+            formControlName="detail"
+          ></angular-editor>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row pt-3">
+    <div class="col-md-12 d-flex justify-content-end">
+      <button mat-raised-button color="primary" (click)="InsertNews()">
+        เพิ่ม
+      </button>
     </div>
   </div>
 </div>
