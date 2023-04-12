@@ -17,8 +17,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class ApiService {
   // path = 'http://103.76.183.192:10/api/';
-  // path = 'http://localhost:80/';
-  path = 'https://www.thekey39.com/api/';
+  path = 'http://localhost:80/';
+  // path = 'https://www.thekey39.com/api/';
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
